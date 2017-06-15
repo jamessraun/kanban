@@ -164,7 +164,6 @@ export default {
   },
   data(){
     return {
-
     }
   },
   methods:{
@@ -213,11 +212,12 @@ export default {
     }
   },
   created(){
-
+    $.ajaxPrefilter(function( options, original_Options, jqXHR ) {
+    options.async = true;
+});
   },
   computed:{
     filteredByBacklog(){
-      console.log(this.tasks[0].status);
       return this.tasks.filter(function(task){
         return task.status==='backlog'
       })
@@ -228,9 +228,9 @@ export default {
       })
     },
     filteredByDoing(){
-      return this.tasks.filter(function(task){
-        return task.status==='doing'
-      })
+        return this.tasks.filter(function(task){
+          return task.status==='doing'
+        })
     },
     filteredByDone(){
       return this.tasks.filter(function(task){
